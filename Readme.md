@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Стас Луцкий](https://up.htmlacademy.ru/javascript/20/user/112001).
-* Наставник: `Неизвестно`.
+* Наставник: Сергей Шершнев.
 
 ---
 
