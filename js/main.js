@@ -55,11 +55,21 @@ for (var i = 1; i <= MAX_PICTURE_NUMBER; i++) {
   arr.push(generateData(i));
 }
 
+var template = document.querySelector('#picture')
+.content
+.querySelector('.picture');
+
+var renderPhoto = function (data) {
+  var photoElement = template.cloneNode(true);
+  photoElement.querySelector('.picture__img').src = data['url'];
+  photoElement.querySelector('.picture__likes').textContent = data['likes'];
+  photoElement.querySelector('.picture__comments').textContent = data['comments'].length;
+
+  return photoElement;
+};
+
+var fragment = document.createDocumentFragment();
 for (var j = 0; j < arr.length; j++) {
-  var template = document.querySelector('#picture').content.querySelector('.picture').cloneNode(true);
-  var data = arr[j];
-  template.querySelector('.picture__img').src = data['url'];
-  template.querySelector('.picture__likes').textContent = data['likes'];
-  template.querySelector('.picture__comments').textContent = data['comments'].length;
-  document.querySelector('.pictures').appendChild(template);
+  fragment.appendChild(renderPhoto(arr[j]));
 }
+document.querySelector('.pictures').appendChild(fragment);
