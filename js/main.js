@@ -73,3 +73,39 @@ for (var j = 0; j < arr.length; j++) {
   fragment.appendChild(renderPhoto(arr[j]));
 }
 document.querySelector('.pictures').appendChild(fragment);
+
+var showItem = function (item) {
+  return item.classList.remove('hidden');
+};
+
+var addHidden = function (item) {
+  return item.classList.add('hidden');
+};
+
+var bigPicture = document.querySelector('.big-picture');
+showItem(bigPicture);
+
+addHidden(bigPicture.querySelector('.social__comment-count'));
+addHidden(bigPicture.querySelector('.comments-loader'));
+
+document.querySelector('body').classList.add('modal-open');
+var addComments = function () {
+  var comment = document.createElement('li');
+  comment.classList.add('social__comment');
+  var commentText = document.createElement('p');
+  commentText.classList.add('social__text');
+  commentText.textContent = getRandomElement(COMMENTS);
+  var img = document.createElement('img');
+  img.classList.add('social__picture');
+  img.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
+  img.alt = 'Аватар комментатора фотографии';
+  img.width = 35;
+  img.height = 35;
+  comment.appendChild(img);
+  comment.appendChild(commentText);
+  return comment;
+};
+bigPicture.querySelector('.big-picture__img').querySelector('img').src = 'img/logo-background-' + getRandomNumber(1, 3) + '.jpg';
+bigPicture.querySelector('.likes-count').textContent = getRandomNumber(LIKES['MIN'], LIKES['MAX']);
+var commentsCont = bigPicture.querySelector('.social__comments');
+commentsCont.appendChild(addComments());
