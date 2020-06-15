@@ -24,7 +24,7 @@ var getRandomElement = function (array) {
 
 var generateComment = function () {
   return ({
-    avatar: 'img/avatar' + getRandomNumber(1, 6) + '.svg',
+    avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
     message: getRandomElement(COMMENTS),
     name: 'Артем'
   });
@@ -90,19 +90,15 @@ addHidden(bigPicture.querySelector('.comments-loader'));
 
 document.querySelector('body').classList.add('modal-open');
 
-var blockSocialСomments = document.querySelector('.social__comments');
-var templateComments = document.querySelector('.social__comment');
-var cloneElement = templateComments.cloneNode(true);
-blockSocialСomments.appendChild(cloneElement);
+var blockСomments = document.querySelector('.social__comments');
+var templateSocialСomments = document.querySelector('#comment')
+.content
+.querySelector('.social__comment');
+var cloneElement = templateSocialСomments.cloneNode(true);
+cloneElement.querySelector('img').src = generateComment()['avatar'];
+cloneElement.querySelector('.social__text').textContent = generateComment()['message'];
 
-var avatar = templateComments.querySelector('img');
-avatar.src = 'img/avatar-' + getRandomNumber(1, 6) + '.svg';
-avatar.alt = 'Аватар комментатора фотографии';
-avatar.width = 35;
-avatar.height = 35;
-
-var socialText = document.querySelector('.social__text');
-socialText.textContent = getRandomElement(COMMENTS);
+blockСomments.appendChild(cloneElement);
 
 bigPicture.querySelector('.big-picture__img').querySelector('img').src = arr[0]['url'];
 bigPicture.querySelector('.likes-count').textContent = arr[0]['likes'];
