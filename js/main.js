@@ -24,7 +24,7 @@ var getRandomElement = function (array) {
 
 var generateComment = function () {
   return ({
-    avatar: 'img/avatar' + getRandomNumber(1, 6) + '.svg',
+    avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
     message: getRandomElement(COMMENTS),
     name: 'Артем'
   });
@@ -42,7 +42,7 @@ var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var arr = [];
+var arrContentData = [];
 var generateData = function (index) {
   return ({
     url: 'photos/' + index + '.jpg',
@@ -52,7 +52,7 @@ var generateData = function (index) {
   });
 };
 for (var i = 1; i <= MAX_PICTURE_NUMBER; i++) {
-  arr.push(generateData(i));
+  arrContentData.push(generateData(i));
 }
 
 var template = document.querySelector('#picture')
@@ -69,7 +69,45 @@ var renderPhoto = function (data) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var j = 0; j < arr.length; j++) {
-  fragment.appendChild(renderPhoto(arr[j]));
+for (var j = 0; j < arrContentData.length; j++) {
+  fragment.appendChild(renderPhoto(arrContentData[j]));
 }
 document.querySelector('.pictures').appendChild(fragment);
+
+var showItem = function (item) {
+  return item.classList.remove('hidden');
+};
+
+var addHidden = function (item) {
+  return item.classList.add('hidden');
+};
+
+var bigPicture = document.querySelector('.big-picture');
+showItem(bigPicture);
+
+addHidden(bigPicture.querySelector('.social__comment-count'));
+addHidden(bigPicture.querySelector('.comments-loader'));
+
+document.querySelector('body').classList.add('modal-open');
+
+var blockComments = document.querySelector('.social__comments');
+var templateSocialComments = document.querySelector('#comment')
+.content
+.querySelector('.social__comment');
+
+var commentsFragment = document.createDocumentFragment();
+
+for (var k = 0; k < arrContentData[0]['comments'].length; k++) {
+  var commentData = arrContentData[0]['comments'][k];
+
+  var cloneElement = templateSocialComments.cloneNode(true);
+  cloneElement.querySelector('img').src = commentData['avatar'];
+  cloneElement.querySelector('img').alt = commentData['name'];
+  cloneElement.querySelector('.social__text').textContent = commentData['message'];
+  commentsFragment.appendChild(cloneElement);
+}
+
+blockComments.appendChild(commentsFragment);
+
+bigPicture.querySelector('.big-picture__img').querySelector('img').src = arrContentData[0]['url'];
+bigPicture.querySelector('.likes-count').textContent = arrContentData[0]['likes'];
