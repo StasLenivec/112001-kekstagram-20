@@ -42,7 +42,7 @@ var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var arrContentData = [];
+var ContentData = [];
 var generateData = function (index) {
   return ({
     url: 'photos/' + index + '.jpg',
@@ -52,7 +52,7 @@ var generateData = function (index) {
   });
 };
 for (var i = 1; i <= MAX_PICTURE_NUMBER; i++) {
-  arrContentData.push(generateData(i));
+  ContentData.push(generateData(i));
 }
 
 var template = document.querySelector('#picture')
@@ -69,8 +69,8 @@ var renderPhoto = function (data) {
 };
 
 var fragment = document.createDocumentFragment();
-for (var j = 0; j < arrContentData.length; j++) {
-  fragment.appendChild(renderPhoto(arrContentData[j]));
+for (var j = 0; j < ContentData.length; j++) {
+  fragment.appendChild(renderPhoto(ContentData[j]));
 }
 document.querySelector('.pictures').appendChild(fragment);
 
@@ -97,8 +97,8 @@ var templateSocialComments = document.querySelector('#comment')
 
 var commentsFragment = document.createDocumentFragment();
 
-for (var k = 0; k < arrContentData[0]['comments'].length; k++) {
-  var commentData = arrContentData[0]['comments'][k];
+for (var k = 0; k < ContentData[0]['comments'].length; k++) {
+  var commentData = ContentData[0]['comments'][k];
 
   var cloneElement = templateSocialComments.cloneNode(true);
   cloneElement.querySelector('img').src = commentData['avatar'];
@@ -109,5 +109,5 @@ for (var k = 0; k < arrContentData[0]['comments'].length; k++) {
 
 blockComments.appendChild(commentsFragment);
 
-bigPicture.querySelector('.big-picture__img').querySelector('img').src = arrContentData[0]['url'];
-bigPicture.querySelector('.likes-count').textContent = arrContentData[0]['likes'];
+bigPicture.querySelector('.big-picture__img').querySelector('img').src = ContentData[0]['url'];
+bigPicture.querySelector('.likes-count').textContent = ContentData[0]['likes'];
