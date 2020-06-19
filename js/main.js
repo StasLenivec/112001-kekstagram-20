@@ -74,6 +74,7 @@ for (var j = 0; j < arrContentData.length; j++) {
 }
 document.querySelector('.pictures').appendChild(fragment);
 
+/*
 var showItem = function (item) {
   return item.classList.remove('hidden');
 };
@@ -82,7 +83,7 @@ var addHidden = function (item) {
   return item.classList.add('hidden');
 };
 
-/*var bigPicture = document.querySelector('.big-picture');
+var bigPicture = document.querySelector('.big-picture');
 showItem(bigPicture);
 
 addHidden(bigPicture.querySelector('.social__comment-count'));
@@ -112,7 +113,7 @@ blockComments.appendChild(commentsFragment);
 bigPicture.querySelector('.big-picture__img').querySelector('img').src = arrContentData[0]['url'];
 bigPicture.querySelector('.likes-count').textContent = arrContentData[0]['likes'];
 */
-var demoEditor= document.querySelector('.img-upload__overlay');
+var demoEditor = document.querySelector('.img-upload__overlay');
 var setupOpen = document.querySelector('#upload-file');
 var setupClose = document.querySelector('#upload-cancel');
 
