@@ -82,7 +82,7 @@ var addHidden = function (item) {
   return item.classList.add('hidden');
 };
 
-var bigPicture = document.querySelector('.big-picture');
+/*var bigPicture = document.querySelector('.big-picture');
 showItem(bigPicture);
 
 addHidden(bigPicture.querySelector('.social__comment-count'));
@@ -111,3 +111,46 @@ blockComments.appendChild(commentsFragment);
 
 bigPicture.querySelector('.big-picture__img').querySelector('img').src = arrContentData[0]['url'];
 bigPicture.querySelector('.likes-count').textContent = arrContentData[0]['likes'];
+*/
+var demoEditor= document.querySelector('.img-upload__overlay');
+var setupOpen = document.querySelector('#upload-file');
+var setupClose = document.querySelector('#upload-cancel');
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  demoEditor.classList.remove('hidden');
+
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  demoEditor.classList.add('hidden');
+
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    closePopup();
+  }
+});
