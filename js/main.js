@@ -113,7 +113,7 @@ blockComments.appendChild(commentsFragment);
 bigPicture.querySelector('.big-picture__img').querySelector('img').src = arrContentData[0]['url'];
 bigPicture.querySelector('.likes-count').textContent = arrContentData[0]['likes'];
 */
-var demoEditor = document.querySelector('.img-upload__overlay');
+var demoEditorPhoto = document.querySelector('.img-upload__overlay');
 var setupOpen = document.querySelector('#upload-file');
 var setupClose = document.querySelector('#upload-cancel');
 
@@ -125,18 +125,18 @@ var onPopupEscPress = function (evt) {
 };
 
 var openPopup = function () {
-  demoEditor.classList.remove('hidden');
+  demoEditorPhoto.classList.remove('hidden');
 
   document.addEventListener('keydown', onPopupEscPress);
 };
 
 var closePopup = function () {
-  demoEditor.classList.add('hidden');
+  demoEditorPhoto.classList.add('hidden');
 
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function () {
+setupOpen.addEventListener('change', function () {
   openPopup();
 });
 
@@ -155,3 +155,21 @@ setupClose.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
+
+var CLASS_PATH = 'effects__preview--';
+var uploadPhoto = document.querySelector('.img-upload__preview');
+var effectsList = document.querySelector('.effects__list');
+
+var effectChange = function (evt) {
+    if (evt.target.classList.contains('effects__radio')) {
+      uploadPhoto.classList.remove(
+        'effects__preview--sepia',
+        'effects__preview--marvin',
+        'effects__preview--phobos',
+        'effects__preview--heat',
+        'effects__preview--chrome');
+      uploadPhoto.style.filter = '';
+      uploadPhoto.classList.add(CLASS_PATH + evt.target.value);
+    }
+  };
+effectsList.addEventListener('click', effectChange);
